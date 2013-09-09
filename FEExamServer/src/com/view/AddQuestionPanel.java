@@ -13,7 +13,7 @@ public class AddQuestionPanel extends JComponent {
 
 	private static final long serialVersionUID = 1L;
 	
-	public void initialize() {
+	public AddQuestionPanel() {
 		setLayout(new MigLayout());
 		setOpaque(false);
 		

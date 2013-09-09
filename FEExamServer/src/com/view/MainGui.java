@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -72,14 +73,26 @@ public class MainGui {
 				currentIndex = id;
 
 				layoutDisplayPanel.removeAll();
-				if (id == 0) {
+				pickerList.requestFocusInWindow();
+				JComponent component = getComponentByIndex(id);
+				layoutDisplayPanel.add(component);
+				contentPanel.revalidate();
+				/*if (id == 0) {
 					pickerList.requestFocusInWindow();
 					AddQuestionPanel addQuestionComponent = new AddQuestionPanel();
-					addQuestionComponent.initialize();
 					layoutDisplayPanel.add(addQuestionComponent);
 					contentPanel.revalidate();
 					frame.pack();
 				}
+				
+				if (id == 1) {
+					pickerList.requestFocusInWindow();
+					AddCategoryPanel addCategoryComponent = new AddCategoryPanel();
+					addCategoryComponent.initialize();
+					layoutDisplayPanel.add(addCategoryComponent);
+					contentPanel.revalidate();
+					frame.pack();
+				}*/
 			}
 		});
 		
@@ -94,6 +107,13 @@ public class MainGui {
 		frame.setVisible(true);
 		
 	}
+	
+	private JComponent getComponentByIndex(int index) {
+		if (index == 0) return new AddQuestionPanel();
+		if (index == 1) return new AddSectionPanel();
+		else return null;
+	}
+	
 	
 	public static void main(String[] args) {
 
