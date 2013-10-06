@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import database.config.Config;
 
-public class Helper {
+public class DBHelper {
 
 	public static boolean isTableExists(String tableName) {
 		if (tableName == null)
@@ -37,4 +37,5 @@ public class Helper {
 			}
 		}
 	}
+	
 }

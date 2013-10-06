@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Toolkit;
 
 import javax.swing.DefaultListCellRenderer;
@@ -19,11 +20,22 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
+import database.config.Config;
+import database.helper.DBHelper;
+import database.transaction.SectionTable;
+
 
 public class MainGui {
 
 	int currentIndex = 0;
 	private static final boolean OPAQUE = false;
+	
+	public MainGui() {
+		// initialize section table first
+		if (!DBHelper.isTableExists(Config.DATABASE_SECTION_TBL)) {
+			SectionTable.createSectionTable();
+		}
+	}
 	
 	public void initialize() {
 		// take original windows style
@@ -105,16 +117,17 @@ public class MainGui {
 		frame.setContentPane(contentPanel);
 		//frame.pack();
 		frame.setVisible(true);
+		frame.setExtendedState(Frame.MAXIMIZED_BOTH);  
 		
 	}
 	
 	private JComponent getComponentByIndex(int index) {
 		if (index == 0) return new AddQuestionPanel();
 		if (index == 1) return new AddSectionPanel();
+		if (index == 2) return new RemoveSectionPanel();
 		else return null;
 	}
-	
-	
+
 	public static void main(String[] args) {
 
 		String laf = UIManager.getSystemLookAndFeelClassName();

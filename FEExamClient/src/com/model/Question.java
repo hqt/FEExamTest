@@ -6,6 +6,7 @@ public class Question {
 	byte[] img;
 	byte[] imga, imgb, imgc, imgd, imge;
 	String explanation;
+	byte[] imgexp;
 	int ans;
 	String section;
 
