@@ -11,7 +11,7 @@ public class IOUtils {
 		try {
 			return Files.toByteArray(file);
 		} catch (IOException e) {
-			return null;
+			return new byte[0];
 		}
 	}
 

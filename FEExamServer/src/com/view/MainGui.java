@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Toolkit;
 
 import javax.swing.DefaultListCellRenderer;
@@ -13,6 +12,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
@@ -114,10 +114,10 @@ public class MainGui {
 		
 		contentPanel.add(layoutPickerTabPane, "spany,grow 1");
 		contentPanel.add(layoutDisplayPanel, "grow");
-		frame.setContentPane(contentPanel);
+		frame.setContentPane(new JScrollPane(contentPanel));
 		//frame.pack();
 		frame.setVisible(true);
-		frame.setExtendedState(Frame.MAXIMIZED_BOTH);  
+		//frame.setExtendedState(Frame.MAXIMIZED_BOTH);  
 		
 	}
 	

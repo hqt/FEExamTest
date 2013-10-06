@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="lib/miglayout-4.0-swing.jar"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.7.2.jar"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.7.2-javadoc.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/FEExamDatabase"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

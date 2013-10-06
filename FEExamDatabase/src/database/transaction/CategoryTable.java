@@ -3,9 +3,10 @@ package database.transaction;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.sql.rowset.serial.SerialBlob;
+import java.util.ArrayList;
+import java.util.List;
 
 import database.config.Config;
 import database.model.Question;
@@ -52,6 +53,55 @@ public class CategoryTable {
 	    }
 	}
 
+	public static List<Question> GetAllEntities(String tblName) {
+		Connection c = null;
+		PreparedStatement stmt = null;
+		List<Question> res = new ArrayList<Question>();
+		
+		try {
+			Class.forName(Config.SQLITE_JDBC);
+			c = DriverManager.getConnection(Config.CONNECTION_STRING);
+			String sql = "SELECT * FROM " + tblName;
+			stmt = c.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String question = rs.getString(1);
+				String ansa = rs.getString(2);
+				String ansb = rs.getString(3);
+				String ansc = rs.getString(4);
+				String ansd = rs.getString(5);
+				String anse = rs.getString(6);
+				String exp = rs.getString(7);
+				int result = rs.getInt(8);
+				byte[] img = rs.getBytes(9);
+				byte[] imga = rs.getBytes(10);
+				byte[] imgb = rs.getBytes(11);
+				byte[] imgc = rs.getBytes(12);
+				byte[] imgd = rs.getBytes(13);
+				byte[] imge = rs.getBytes(14);
+				byte[] imgexp = rs.getBytes(15);
+				Question q = new Question(question, ansa, ansb, ansc, ansd, anse,
+						img, imga, imgb, imgc, imgd, imge, exp, imgexp, result, tblName);
+				res.add(q);
+			}
+			
+			return res;
+		}
+		catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			return res;
+		}
+		finally {
+			try {
+				stmt.close();
+				c.close();
+			}
+			catch (SQLException e) {
+				System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			}
+		}
+	}
+	
 	public static boolean AddEntity(String tblName, Question question) {
 		Connection c = null;
 		PreparedStatement stmt = null;
@@ -77,18 +127,17 @@ public class CategoryTable {
 			stmt.setString(6, question.getAnse());
 			stmt.setString(7, question.getExplanation());
 			stmt.setInt(8, question.getAns());
-			stmt.setBlob(9, new SerialBlob(question.getImg()));
-			stmt.setBlob(10, new SerialBlob(question.getImga()));
-			stmt.setBlob(11, new SerialBlob(question.getImgb()));
-			stmt.setBlob(12, new SerialBlob(question.getImgc()));
-			stmt.setBlob(13, new SerialBlob(question.getImgd()));
-			stmt.setBlob(14, new SerialBlob(question.getImge()));
-			stmt.setBlob(15, new SerialBlob(question.getImgexp()));
+			stmt.setBytes(9, question.getImg());
+			stmt.setBytes(10, question.getImga());
+			stmt.setBytes(11, question.getImgb());
+			stmt.setBytes(12, question.getImgc());
+			stmt.setBytes(13, question.getImgd());
+			stmt.setBytes(14, question.getImge());
+			stmt.setBytes(15, question.getImgexp());
 
 			stmt.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			System.out.println(e);
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			return false;
 		} finally {
@@ -126,4 +175,5 @@ public class CategoryTable {
 				}
 		    }
 	}
+	
 }

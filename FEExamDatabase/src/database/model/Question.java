@@ -130,4 +130,13 @@ public class Question {
 	public void setSection(String section) {
 		this.section = section;
 	}
+
+	@Override
+	public String toString() {
+		return "Question [question=" + question + ", ansa=" + ansa + ", ansb=" + ansb + ", ansc=" + ansc + ", ansd="
+				+ ansd + ", anse=" + anse + ", explanation=" + explanation + ", ans=" + ans + ", section=" + section
+				+ "]";
+	}
+	
+	
 }

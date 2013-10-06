@@ -35,7 +35,20 @@ public class AddQuestionController {
 		String explain = frame.explaintxt.getText();
 		
 		// answer
-		int ans = Integer.parseInt(frame.answertxt.getText());
+		int ans = -1;
+		try {
+			ans = Integer.parseInt(frame.answertxt.getText());
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "Answer should be an integer");
+			frame.answertxt.setText("");
+			return false;
+		}
+		if (ans < 0 || ans > 4) {
+			JOptionPane.showMessageDialog(null, "Answer should be in range 1 to 4"); 
+			frame.answertxt.setText("");
+			return false;
+		}
 		
 		// get image
 		byte[] questionimg = IOUtils.getBinaryFromFile(frame.imgquestiontxt.getText());
