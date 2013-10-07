@@ -81,7 +81,7 @@ public class CategoryTable {
 				byte[] imge = rs.getBytes(14);
 				byte[] imgexp = rs.getBytes(15);
 				Question q = new Question(question, ansa, ansb, ansc, ansd, anse,
-						img, imga, imgb, imgc, imgd, imge, exp, imgexp, result, tblName);
+						img, imga, imgb, imgc, imgd, imge, exp, imgexp, result, tblName, 5);
 				res.add(q);
 			}
 			

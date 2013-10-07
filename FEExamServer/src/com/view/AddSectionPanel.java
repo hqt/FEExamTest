@@ -39,6 +39,7 @@ public class AddSectionPanel extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.addSection();
+				inputtxt.setText("");
 			}
 		});
 		
@@ -46,6 +47,7 @@ public class AddSectionPanel extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.cancelSection();
+				inputtxt.setText("");
 			}
 		});
 	}

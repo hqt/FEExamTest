@@ -1,5 +1,8 @@
 package database.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Question {
 	String question;
 	String ansa, ansb, ansc, ansd, anse;
@@ -10,29 +13,43 @@ public class Question {
 	int ans;
 	String section;
 
-   	
+
+	// custom field
+	int numOfSelections;
+	String[] selections;
+	List<byte[]> imgSelections = new ArrayList<byte[]>();
+	
 	public Question(String question, String ansa, String ansb, String ansc,
 			String ansd, String anse, byte[] img, byte[] imga, byte[] imgb,
 			byte[] imgc, byte[] imgd, byte[] imge, String explanation,
-			byte[] imgexp, int ans, String section) {
+			byte[] imgexp, int ans, String section, int numOfSelections) {
 		super();
+		List<String> tmp = new ArrayList<String>();
 		this.question = question;
-		this.ansa = ansa;
-		this.ansb = ansb;
-		this.ansc = ansc;
-		this.ansd = ansd;
-		this.anse = anse;
+		this.ansa = ansa;	tmp.add(ansa);
+		this.ansb = ansb;	tmp.add(ansb);
+		this.ansc = ansc;	tmp.add(ansc);
+		this.ansd = ansd;	tmp.add(ansd);
+		this.anse = anse;	tmp.add(anse);
 		this.img = img;
-		this.imga = imga;
-		this.imgb = imgb;
-		this.imgc = imgc;
-		this.imgd = imgd;
-		this.imge = imge;
+		this.imga = imga;	imgSelections.add(imga);
+		this.imgb = imgb;	imgSelections.add(imgb);
+		this.imgc = imgc;	imgSelections.add(imgc);
+		this.imgd = imgd;	imgSelections.add(imgd);
+		this.imge = imge;	imgSelections.add(imge);
 		this.explanation = explanation;
 		this.imgexp = imgexp;
 		this.ans = ans;
 		this.section = section;
+		this.numOfSelections = numOfSelections;
+	
+		// process data
+		selections = new String[numOfSelections];
+		for (int i = 0; i < numOfSelections; i++) selections[i] = tmp.get(i);
+		
 	}
+	
+	public List<byte[]> getAllImages() { return imgSelections; }
 	
 	public byte[] getImga() {
 		return imga;

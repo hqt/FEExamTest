@@ -27,7 +27,6 @@ public class AddQuestionPanel extends JComponent {
 	List<String> sectionList;
 
 	// textfield
-	public JTextField sectiontxt;
 	public JTextArea questiontxt;
 	public JTextField ansatxt;
 	public JTextField ansbtxt;
@@ -81,7 +80,6 @@ public class AddQuestionPanel extends JComponent {
 		JLabel answerlbl = new JLabel("Answer");
 		
 		/* text field section */
-		sectiontxt = new JTextField(40);	
 		questiontxt = new JTextArea(4, 70);	
 		ansatxt = new JTextField(70);
 		ansbtxt = new JTextField(70);

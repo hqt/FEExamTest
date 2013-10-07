@@ -64,7 +64,7 @@ public class AddQuestionController {
 		String section = sectionList.get(index);
 		
 		Question q = new Question(question, ansa, ansb, ansc, ansd, anse, 
-				questionimg, imga, imgb, imgc, imgd, imge, explain, imgexp, ans, section);
+				questionimg, imga, imgb, imgc, imgd, imge, explain, imgexp, ans, section, 5);
 		
 		questionList.add(q);
 		resetFields();

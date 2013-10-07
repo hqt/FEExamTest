@@ -1,5 +1,7 @@
 package com.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -38,6 +40,13 @@ public class RemoveSectionPanel extends JComponent {
 		list.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
+				//TODO: implement here
+			}
+		});
+		
+		removeBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				boolean res = controller.removeAtIndex(list.getSelectedIndex());
 				if (res) {
 					JOptionPane.showMessageDialog(null, "Successfully remove");
@@ -49,7 +58,6 @@ public class RemoveSectionPanel extends JComponent {
 				}
 			}
 		});
-		
 	}
 
 }
