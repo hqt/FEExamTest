@@ -5,6 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+
+import net.miginfocom.swing.MigLayout;
+
 import com.model.CommonDataModel;
 import com.view.AttemptView;
 
@@ -62,6 +67,7 @@ public class AttemptController {
 		String[] listData = new String[questions.size()];
 		for (int i = 0; i < questions.size(); i++) listData[i] = (i+1) +  "";
 		frame.lstQuestions.setListData(listData);
+		
 		showView();
 		
 	}
