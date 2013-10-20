@@ -77,7 +77,7 @@ public class CommonDataModel {
 	public boolean generateRandomQuestion(int quantity) {
 		if (quantity < sections.size()) return false;
 
-		resetFields();
+		resetFields(quantity);
 		
 		// generate all questions from 0 to nSections - 1
 		// each category takes quantity / sections.size()
@@ -99,7 +99,7 @@ public class CommonDataModel {
 	
 	public void generateQuestionBySection(String sectionName, int num) {
 		num = Math.min(num, CategoryTable.getNumberEntities(sectionName));
-		resetFields();
+		resetFields(num);
 		List<Integer> ids = getRandomOrder(sectionName, num);
 		questionList = Helper.getAllQuestionsByIds(sectionName, ids);
 	}
@@ -108,13 +108,15 @@ public class CommonDataModel {
 	 * reset again all fields
 	 * maybe because start new session test
 	 */
-	private void resetFields() {
+	private void resetFields(int num) {
 		questionList = new ArrayList<Question>();
 		questionResult = new ArrayList<Integer>();
+		for (int i = 0; i < num; i++) {
+			questionResult.add(0); // Wrong answer by default
+		}
 	}
 
 	public void processResult(int questionIndex, int answerIndex) {
-		
 		if (questionList.get(questionIndex).getAns() == (answerIndex + 1)) {
 			questionResult.set(questionIndex, 100);
 		} else {
