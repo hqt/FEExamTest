@@ -23,6 +23,16 @@ public class MainController {
 			List<Question> questions = CategoryTable.GetAllEntities(tblName);
 			database.put(tblName, questions);
 		}
+		
+		/**
+		 * Load data.
+		 * View a = new View();
+		 * a.listbox.add(assadasdasd);
+		 * a.va = mn;
+		 * 
+		 * View -> va ViewA, vb ViewB
+		 * 
+		 */
 	}
 	
 }

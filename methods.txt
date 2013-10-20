@@ -1,0 +1,5 @@
+getAllCategories
+getCurrentUser
+getAllQuestionByCategory
+getRandomQuestion(int amount)
+checkResult
