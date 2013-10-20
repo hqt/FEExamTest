@@ -5,11 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
 import javax.swing.JOptionPane;
 
->>>>>>> c0cd2f63d688c8abe2feec5ef50edab1c717b28c
 import com.model.CommonDataModel;
 import com.view.AttemptView;
 import com.view.QuestionComponent;
@@ -71,6 +68,7 @@ public class AttemptController {
 		
 		String[] listData = new String[questions.size()];
 		for (int i = 0; i < questions.size(); i++) listData[i] = (i+1) +  "";
+		frame.lstQuestions.removeAll();
 		frame.lstQuestions.setListData(listData);
 		
 		setQuestionListView();
@@ -80,23 +78,10 @@ public class AttemptController {
 	}
 
 	public void setQuestionListView() {
+		frame.pnlQuestion.removeAll();
 		List<Question> questions = CommonDataModel.getInstance().questionList;
+		
 		for (int i = 0; i < questions.size(); i++) {
-//			JPanel pnlTest = new JPanel();
-//			pnlTest.setBackground(Color.RED);
-//			GridBagConstraints gbc_pnlQuestions = new GridBagConstraints();
-//			gbc_pnlQuestions.fill = GridBagConstraints.BOTH;
-//			gbc_pnlQuestions.gridx = 1;
-//			gbc_pnlQuestions.gridy = 0;
-//
-//			JLabel lblNewLabel = new JLabel("New label");
-//			pnlTest.add(lblNewLabel);
-//
-//			JEditorPane editorPane = new JEditorPane();
-//			pnlTest.add(editorPane);
-//
-//			frame.pnlQuestion.add(pnlTest, "wrap");
-			
 			frame.pnlQuestion.add(new QuestionComponent(i, questions.get(i)), "wrap");
 		}
 	}

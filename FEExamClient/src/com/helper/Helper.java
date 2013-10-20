@@ -12,7 +12,9 @@ public class Helper {
 	public static List<Integer> Shuffle(int n) {
 
 		List<Integer> shufftle = new ArrayList<Integer>();
-		for (int i = 0; i < n; i++)	shufftle.set(i, i);
+		for (int i = 0; i < n; i++)	{
+			shufftle.add(i);
+		}
 		return Shufftle(shufftle);
 	}
 
