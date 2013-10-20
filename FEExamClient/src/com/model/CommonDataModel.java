@@ -120,8 +120,6 @@ public class CommonDataModel {
 		} else {
 			questionResult.set(questionIndex, 0);
 		}
-		// TODO Auto-generated method stub
-		
 	}
 	
 	

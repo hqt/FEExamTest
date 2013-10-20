@@ -5,11 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
 import javax.swing.JOptionPane;
 
->>>>>>> c0cd2f63d688c8abe2feec5ef50edab1c717b28c
 import com.model.CommonDataModel;
 import com.view.AttemptView;
 import com.view.QuestionComponent;
