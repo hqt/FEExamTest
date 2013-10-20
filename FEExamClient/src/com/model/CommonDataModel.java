@@ -34,12 +34,12 @@ public class CommonDataModel {
 
 	Map<String, List<Integer>> randomQuestions = new HashMap<String, List<Integer>>();
 	Map<String, Integer> pivot = new HashMap<String, Integer>();
+	List<String> sections = SectionTable.selectAllSections();
 	
 	private CommonDataModel() {
 	
 		// building order or random questions
 		// this order will be kept until restart app
-		List<String> sections = SectionTable.selectAllSections();
 		for (String section : sections) {
 			int rows = CategoryTable.getNumberEntities(section);
 			List<Integer> shufftles = Helper.Shuffle(rows);
@@ -70,13 +70,47 @@ public class CommonDataModel {
 		return res;
 	}
 
-	public void generateRandomQuestion(int n) {
-		
-	}
+	/**
+	 * return true : can generate questions
+	 * return false : cannot (because to low questions)
+	 */
+	public boolean generateRandomQuestion(int quantity) {
+		if (quantity < sections.size()) return false;
 
-	public void generateQuestionBySection(String sectionName) {
-		questionList = CategoryTable.GetAllEntities(sectionName);
+		resetFields();
 		
+		// generate all questions from 0 to nSections - 1
+		// each category takes quantity / sections.size()
+		int num = quantity / sections.size();
+		List<Integer> ids;
+		for (int i = 0; i < sections.size(); i++) {
+			ids = getRandomOrder(sections.get(i), num);
+			questionList.addAll(Helper.getAllQuestionsByIds(sections.get(i), ids));
+		}
+		// last category. might contains more questions
+		int id = sections.size() - 1;
+		num = quantity % sections.size();
+		ids = getRandomOrder(sections.get(id), num);
+		questionList.addAll(Helper.getAllQuestionsByIds(sections.get(sections.size()), ids));
+
+		questionList = Helper.Shufftle(questionList);
+		return true;
+	}
+	
+	public void generateQuestionBySection(String sectionName, int num) {
+		num = Math.min(num, CategoryTable.getNumberEntities(sectionName));
+		resetFields();
+		List<Integer> ids = getRandomOrder(sectionName, num);
+		questionList = Helper.getAllQuestionsByIds(sectionName, ids);
+	}
+	
+	/**
+	 * reset again all fields
+	 * maybe because start new session test
+	 */
+	private void resetFields() {
+		questionList = new ArrayList<Question>();
+		questionResult = new ArrayList<Integer>();
 	}
 	
 	

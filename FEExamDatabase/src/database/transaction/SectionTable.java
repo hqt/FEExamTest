@@ -122,4 +122,32 @@ public class SectionTable {
 			}
 		}
 	}
+	
+	public static int getNumberSection() {
+		Connection c = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			Class.forName(Config.SQLITE_JDBC);
+			c = DriverManager.getConnection(Config.CONNECTION_STRING);
+			String sql = "SELECT COUNT(*) AS total FROM " + Config.DATABASE_SECTION_TBL;
+			stmt = c.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			return rs.getInt("total");
+		}
+		catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			return 0;
+			
+		}
+		finally {
+			try {
+				stmt.close();
+				c.close();
+			}
+			catch (SQLException e) {
+				System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			}
+		}
+	}
 }
