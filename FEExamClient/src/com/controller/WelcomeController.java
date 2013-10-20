@@ -1,8 +1,13 @@
 package com.controller;
 
 import java.awt.EventQueue;
+import java.util.List;
+import java.util.Locale.Category;
 
+import com.model.CommonDataModel;
 import com.view.WelcomeView;
+
+import database.transaction.SectionTable;
 
 public class WelcomeController {
 	private static volatile WelcomeController controller;
@@ -35,18 +40,28 @@ public class WelcomeController {
 	}
 
 	public void load() {
-		frame.cbxQuestionPack.addItem("hallu");
-		frame.cbxQuestionPack.addItem("hello");
-		frame.cbxQuestionPack.addItem("holla");
+		CommonDataModel model = CommonDataModel.getInstance();
 		
-		frame.lblHello.setText("Hello TrungDQ");
+		List<String> categories = SectionTable.selectAllSections();
+		frame.cbxQuestionPack.removeAllItems();
+		frame.cbxQuestionPack.addItem("Random 50 General Questions");
 		
+		for (String category : categories) {
+			frame.cbxQuestionPack.addItem(category);
+		}
+		
+		
+		setUsername(model.profile.getName());
 		showView();
 	}
 	
 	public static void main(String args[]) {
 		WelcomeController wc = new WelcomeController();
 		wc.load();
+	}
+
+	public void setUsername(String text) {
+		frame.lblHello.setText("Hello " + text);
 	}
 }
 

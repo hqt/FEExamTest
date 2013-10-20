@@ -10,12 +10,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import com.controller.ProfileController;
 
 public class ProfileView extends JFrame {
 
@@ -24,6 +27,8 @@ public class ProfileView extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	
+	public JTextPane txtName = new JTextPane();
 
 	/**
 	 * Launch the application.
@@ -57,18 +62,25 @@ public class ProfileView extends JFrame {
 		lblYourName.setBounds(10, 11, 309, 51);
 		contentPane.add(lblYourName);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(57, 72, 215, 37);
-		contentPane.add(textPane);
+		txtName.setBounds(57, 72, 215, 37);
+		contentPane.add(txtName);
 		
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				boolean isRegisteredUser = ProfileController.getInstance().changeProfile(txtName.getText());
+				if (isRegisteredUser) {
+					JOptionPane.showMessageDialog(null, "Welcome back " + txtName.getText());
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Welcome to FE Exam, " + txtName.getText());
+				}
+				
 				dispose();
 			}
 		});
 		btnOk.setBounds(121, 120, 89, 36);
 		contentPane.add(btnOk);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{contentPane, lblYourName, textPane, btnOk}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{contentPane, lblYourName, txtName, btnOk}));
 	}
 }

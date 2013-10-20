@@ -7,15 +7,35 @@ import java.util.Map;
 
 import com.helper.Helper;
 
+import database.model.Profile;
+import database.model.Question;
 import database.transaction.CategoryTable;
+import database.transaction.ProfileTable;
 import database.transaction.SectionTable;
 
 public class CommonDataModel {
+	
+	private static volatile CommonDataModel controller;
+	public Profile profile;
+	public List<Question> questionList;
+	public List<Integer> questionResult;
+	
+	public static CommonDataModel getInstance() {
+		if (controller == null) {
+			synchronized (CommonDataModel.class) {
+				if (controller == null) {
+					controller = new CommonDataModel();
+				}
+			}
+		}
+		return controller;
+	}
+
 
 	Map<String, List<Integer>> randomQuestions = new HashMap<String, List<Integer>>();
 	Map<String, Integer> pivot = new HashMap<String, Integer>();
 	
-	public CommonDataModel() {
+	private CommonDataModel() {
 	
 		// building order or random questions
 		// this order will be kept until restart app
@@ -26,6 +46,10 @@ public class CommonDataModel {
 			randomQuestions.put(section, shufftles);
 			// building pivot to store current location of each type of question
 			pivot.put(section, 0);
+		}
+		
+		if (profile == null) {
+			profile = ProfileTable.getProfileByName("FPT Student");
 		}
 	}
 	
@@ -45,5 +69,15 @@ public class CommonDataModel {
 		
 		return res;
 	}
+
+	public void generateRandomQuestion(int n) {
+		
+	}
+
+	public void generateQuestionBySection(String sectionName) {
+		questionList = CategoryTable.GetAllEntities(sectionName);
+		
+	}
+	
 	
 }

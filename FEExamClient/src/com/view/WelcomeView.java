@@ -101,7 +101,7 @@ public class WelcomeView extends JFrame {
 		JButton btnAttempt = new JButton("Attempt");
 		btnAttempt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AttemptController.getInstance().load();
+				AttemptController.getInstance().load(cbxQuestionPack.getSelectedItem().toString());
 				dispose();
 			}
 		});
