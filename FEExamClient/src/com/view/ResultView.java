@@ -1,6 +1,7 @@
 package com.view;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -27,7 +28,7 @@ public class ResultView extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	public JLabel lblYourScore = new JLabel("Your score: 23/50");
+	public JLabel lblYourScore = new JLabel("Your score: 0/0");
 	public JLabel lblUsername = new JLabel("Username");
 
 	/**
@@ -108,7 +109,8 @@ public class ResultView extends JFrame {
 		lblExit.setForeground(Color.BLUE);
 		lblExit.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblExit.setHorizontalAlignment(SwingConstants.CENTER);
-		lblExit.setBounds(10, 349, 610, 27);
+		lblExit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblExit.setBounds(275, 349, 76, 27);
 		lblExit.addMouseListener(new MouseAdapter()  
 		{  
 		    public void mouseClicked(MouseEvent e)  

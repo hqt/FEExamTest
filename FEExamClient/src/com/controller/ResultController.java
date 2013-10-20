@@ -1,7 +1,10 @@
 package com.controller;
 
 import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.model.CommonDataModel;
 import com.view.ResultView;
 
 public class ResultController {
@@ -40,6 +43,22 @@ public class ResultController {
 	}
 
 	public void load() {
+		//List<Integer> questionResult = CommonDataModel.getInstance().questionResult;
+		List<Integer> questionResult = new ArrayList<Integer>();
+		questionResult.add(100);
+		questionResult.add(0);
+		questionResult.add(0);
+		questionResult.add(100);
+		questionResult.add(100);
+		
+		
+		int total = 0;
+		for (Integer mark : questionResult) {
+			total += mark;
+		}
+		frame.lblYourScore.setText("Your score: " + (total / 100) + "/" + questionResult.size());
+		frame.lblUsername.setText(CommonDataModel.getInstance().profile.getName());
+		
 		showView();
 		
 	}
