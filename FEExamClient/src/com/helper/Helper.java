@@ -4,22 +4,45 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import database.model.Question;
+import database.transaction.CategoryTable;
+
 public class Helper {
+
+	public static List<Integer> Shuffle(int n) {
+
+		List<Integer> shufftle = new ArrayList<Integer>();
+		for (int i = 0; i < n; i++)	shufftle.set(i, i);
+		return Shufftle(shufftle);
+	}
 
 	/**
 	 * using Knuth Shufftle algorithm random numbers of range [0,n)
+	 * using Java Generic
 	 */
-	public static List<Integer> Shuffle(int n) {
-		int[] shufftle = new int[n];
-		for (int i = 0; i < n; i++)	shufftle[i] = i;
+	public static <T> List<T> Shufftle(List<T> list) {
+		int n = list.size();
 
 		// using Knuth Shufftle algorithm
-		Random random = new Random();	// not good. but optimize
-		List<Integer> res = new ArrayList<Integer>(n);
+		Random random;
 		for (int i = 0; i < n; i++) {
-			// random = new Random();
+			random = new Random();
 			int k = random.nextInt(i + 1);
-			res.add(k);
+
+			// swap k and i
+			T tmp = list.get(i);
+			list.set(i, list.get(k));
+			list.set(k, tmp);
+		}
+
+		return list;
+	}
+
+	public static List<Question> getAllQuestionsByIds(String tblName, List<Integer> ids) {
+		List<Question> res = new ArrayList<Question>();
+		for (Integer id : ids) {
+			Question question = CategoryTable.getQuestionById(tblName, id);
+			res.add(question);
 		}
 		return res;
 	}

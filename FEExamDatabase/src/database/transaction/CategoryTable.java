@@ -212,4 +212,53 @@ public class CategoryTable {
 		}
 	}
 
+	public static Question getQuestionById(String tblName, Integer id) {
+		Connection c = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			Class.forName(Config.SQLITE_JDBC);
+			c = DriverManager.getConnection(Config.CONNECTION_STRING);
+			String sql = "SELECT * FROM " + tblName;
+			stmt = c.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String question = rs.getString(1);
+				String ansa = rs.getString(2);
+				String ansb = rs.getString(3);
+				String ansc = rs.getString(4);
+				String ansd = rs.getString(5);
+				String anse = rs.getString(6);
+				String exp = rs.getString(7);
+				int result = rs.getInt(8);
+				byte[] img = rs.getBytes(9);
+				byte[] imga = rs.getBytes(10);
+				byte[] imgb = rs.getBytes(11);
+				byte[] imgc = rs.getBytes(12);
+				byte[] imgd = rs.getBytes(13);
+				byte[] imge = rs.getBytes(14);
+				byte[] imgexp = rs.getBytes(15);
+				Question q = new Question(question, ansa, ansb, ansc, ansd, anse,
+						img, imga, imgb, imgc, imgd, imge, exp, imgexp, result, tblName, 5);
+				return q;
+			}
+			
+			return null;
+		}
+		catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			return null;
+		}
+		finally {
+			try {
+				stmt.close();
+				c.close();
+			}
+			catch (SQLException e) {
+				System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			}
+		}
+		
+	}
+
 }

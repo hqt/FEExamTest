@@ -5,6 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
+import javax.swing.JOptionPane;
+
+>>>>>>> c0cd2f63d688c8abe2feec5ef50edab1c717b28c
 import com.model.CommonDataModel;
 import com.view.AttemptView;
 import com.view.QuestionComponent;
@@ -47,10 +52,13 @@ public class AttemptController {
 
 	public void load(String sectionName) {
 		if (sectionName.equals("Random 50 General Questions")) {
-			CommonDataModel.getInstance().generateRandomQuestion(50);
+			boolean res = CommonDataModel.getInstance().generateRandomQuestion(50);
+			if (!res) {
+				JOptionPane.showMessageDialog(null, "Question is too low. should be increase more");
+			}
 		}
 		else {
-			CommonDataModel.getInstance().generateQuestionBySection(sectionName);
+			CommonDataModel.getInstance().generateQuestionBySection(sectionName, 20);
 		}
 		
 		// create information for attemp view
