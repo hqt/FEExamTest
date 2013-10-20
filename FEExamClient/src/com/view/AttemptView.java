@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.controller.AttemptController;
 import com.controller.ResultController;
 import com.controller.WelcomeController;
 
@@ -29,6 +30,8 @@ import net.miginfocom.swing.MigLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+import com.model.CommonDataModel;
+
 import javax.swing.JList;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -43,7 +46,17 @@ public class AttemptView extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	
+	
+	/** fields need to access from controller */
+	public JLabel lblDate = new JLabel("12/12/2013 01:55 PM");
+	public JLabel lblUsername = new JLabel("Username1");
+	public JLabel lblSection = new JLabel("Network");
+	public JComboBox<String> cbxPagination = new JComboBox<String>();
+	public JList<String> lstQuestions = new JList<String>();
+	
+	
+	
 	/**
 	 * Launch the application.
 	 * @throws Exception 
@@ -90,35 +103,32 @@ public class AttemptView extends JFrame {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0};
 		panel.setLayout(gbl_panel);
 		
-		JLabel lblPm = new JLabel("12/12/2013 01:55 PM");
-		lblPm.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDate.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblPm = new GridBagConstraints();
 		gbc_lblPm.anchor = GridBagConstraints.NORTH;
 		gbc_lblPm.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblPm.insets = new Insets(0, 0, 5, 0);
 		gbc_lblPm.gridx = 0;
 		gbc_lblPm.gridy = 0;
-		panel.add(lblPm, gbc_lblPm);
+		panel.add(lblDate, gbc_lblPm);
 		
-		JLabel lblQuestionPack = new JLabel("Username1");
-		lblQuestionPack.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUsername.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblQuestionPack = new GridBagConstraints();
 		gbc_lblQuestionPack.anchor = GridBagConstraints.NORTH;
 		gbc_lblQuestionPack.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblQuestionPack.insets = new Insets(0, 0, 5, 0);
 		gbc_lblQuestionPack.gridx = 0;
 		gbc_lblQuestionPack.gridy = 1;
-		panel.add(lblQuestionPack, gbc_lblQuestionPack);
+		panel.add(lblUsername, gbc_lblQuestionPack);
 		
-		JLabel lblNewLabel = new JLabel("Network");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSection.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblSection.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.fill = GridBagConstraints.BOTH;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 2;
-		panel.add(lblNewLabel, gbc_lblNewLabel);
+		panel.add(lblSection, gbc_lblNewLabel);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.PINK);
@@ -136,13 +146,12 @@ public class AttemptView extends JFrame {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(label);
 		
-		JComboBox comboBox = new JComboBox();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.fill = GridBagConstraints.BOTH;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox.gridx = 0;
 		gbc_comboBox.gridy = 4;
-		panel.add(comboBox, gbc_comboBox);
+		panel.add(cbxPagination, gbc_comboBox);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(SystemColor.info);
@@ -154,7 +163,6 @@ public class AttemptView extends JFrame {
 		panel.add(panel_2, gbc_panel_2);
 		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JList lstQuestions = new JList();
 		lstQuestions.setBackground(new Color(248, 248, 255));
 		panel_2.add(lstQuestions);
 		
@@ -168,6 +176,7 @@ public class AttemptView extends JFrame {
 		panel.add(btnFinish, gbc_btnFinish);
 		btnFinish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AttemptController.getInstance().processUserInput();
 				ResultController.getInstance().load();
 				dispose();
 			}
