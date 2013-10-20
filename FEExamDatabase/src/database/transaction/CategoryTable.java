@@ -57,6 +57,7 @@ public class CategoryTable {
 		Connection c = null;
 		PreparedStatement stmt = null;
 		List<Question> res = new ArrayList<Question>();
+		int numOfSelections = 0;
 		
 		try {
 			Class.forName(Config.SQLITE_JDBC);
@@ -65,24 +66,30 @@ public class CategoryTable {
 			stmt = c.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				String question = rs.getString(1);
-				String ansa = rs.getString(2);
-				String ansb = rs.getString(3);
-				String ansc = rs.getString(4);
-				String ansd = rs.getString(5);
-				String anse = rs.getString(6);
-				String exp = rs.getString(7);
-				int result = rs.getInt(8);
-				byte[] img = rs.getBytes(9);
-				byte[] imga = rs.getBytes(10);
-				byte[] imgb = rs.getBytes(11);
-				byte[] imgc = rs.getBytes(12);
-				byte[] imgd = rs.getBytes(13);
-				byte[] imge = rs.getBytes(14);
-				byte[] imgexp = rs.getBytes(15);
+				numOfSelections = 0;
+				String question = rs.getString(2);
+				String ansa = rs.getString(3); if (!ansa.equals("")) numOfSelections++;
+				String ansb = rs.getString(4); if (!ansb.equals("")) numOfSelections++;
+				String ansc = rs.getString(5); if (!ansc.equals("")) numOfSelections++;
+				String ansd = rs.getString(6); if (!ansd.equals("")) numOfSelections++;
+				String anse = rs.getString(7); if (!anse.equals("")) numOfSelections++;
+				String exp = rs.getString(8);
+				int result = rs.getInt(9);
+				byte[] img = rs.getBytes(10);
+				byte[] imga = rs.getBytes(11);
+				byte[] imgb = rs.getBytes(12);
+				byte[] imgc = rs.getBytes(13);
+				byte[] imgd = rs.getBytes(14);
+				byte[] imge = rs.getBytes(15);
+				byte[] imgexp = rs.getBytes(16);
+				
 				Question q = new Question(question, ansa, ansb, ansc, ansd, anse,
-						img, imga, imgb, imgc, imgd, imge, exp, imgexp, result, tblName, 5);
-				res.add(q);
+						img, imga, imgb, imgc, imgd, imge, exp, imgexp, result, tblName, numOfSelections);
+				
+				// TrungDQ: if there is no options for the question, then the question is absolutely wrong or error.
+				if (numOfSelections > 0) {
+					res.add(q);
+				}
 			}
 			
 			return res;

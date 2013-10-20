@@ -15,9 +15,9 @@ public class Question {
 
 
 	// custom field
-	int numOfSelections;
-	String[] selections;
-	List<byte[]> imgSelections = new ArrayList<byte[]>();
+	public int numOfSelections;
+	public String[] selections;
+	public List<byte[]> imgSelections = new ArrayList<byte[]>();
 	
 	public Question(String question, String ansa, String ansb, String ansc,
 			String ansd, String anse, byte[] img, byte[] imga, byte[] imgb,
@@ -45,7 +45,10 @@ public class Question {
 	
 		// process data
 		selections = new String[numOfSelections];
-		for (int i = 0; i < numOfSelections; i++) selections[i] = tmp.get(i);
+		for (int i = 0; i < numOfSelections; i++) {
+			selections[i] = tmp.get(i);
+		}
+		
 		
 	}
 	
@@ -152,7 +155,7 @@ public class Question {
 	public String toString() {
 		return "Question [question=" + question + ", ansa=" + ansa + ", ansb=" + ansb + ", ansc=" + ansc + ", ansd="
 				+ ansd + ", anse=" + anse + ", explanation=" + explanation + ", ans=" + ans + ", section=" + section
-				+ "]";
+				+ "]" + ", numOfSelections=" + numOfSelections + "]";
 	}
 	
 	

@@ -78,6 +78,17 @@ public class CommonDataModel {
 		questionList = CategoryTable.GetAllEntities(sectionName);
 		
 	}
+
+	public void processResult(int questionIndex, int answerIndex) {
+		
+		if (questionList.get(questionIndex).getAns() == (answerIndex + 1)) {
+			questionResult.set(questionIndex, 100);
+		} else {
+			questionResult.set(questionIndex, 0);
+		}
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

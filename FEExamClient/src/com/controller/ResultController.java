@@ -43,15 +43,8 @@ public class ResultController {
 	}
 
 	public void load() {
-		//List<Integer> questionResult = CommonDataModel.getInstance().questionResult;
-		List<Integer> questionResult = new ArrayList<Integer>();
-		questionResult.add(100);
-		questionResult.add(0);
-		questionResult.add(0);
-		questionResult.add(100);
-		questionResult.add(100);
-		
-		
+		List<Integer> questionResult = CommonDataModel.getInstance().questionResult;
+
 		int total = 0;
 		for (Integer mark : questionResult) {
 			total += mark;
