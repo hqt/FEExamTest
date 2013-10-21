@@ -52,6 +52,16 @@ public class SessionQuestion {
 	public void setPercentCorrect(int percentCorrect) {
 		this.percentCorrect = percentCorrect;
 	}
+
+
+	@Override
+	public String toString() {
+		return "SessionQuestion [sessionQuestionId=" + sessionQuestionId + ", sessionId=" + sessionId
+				+ ", categoryName=" + categoryName + ", idQuestion=" + idQuestion + ", percentCorrect="
+				+ percentCorrect + "]";
+	}
+	
+	
 	
 	
 }

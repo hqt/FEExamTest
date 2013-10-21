@@ -1,15 +1,23 @@
 package com.helper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
+import com.model.CommonDataModel;
+
+import database.config.Config;
+import database.helper.DBHelper;
 import database.model.Question;
+import database.model.SessionQuestion;
+import database.model.TestSession;
 import database.transaction.CategoryTable;
+import database.transaction.SessionQuestionTable;
+import database.transaction.SesstionTestTable;
 
 public class Helper {
 
-	public static List<Integer> Shuffle(int n) {
+	public static List<Integer> Shufftle(int n) {
 
 		List<Integer> shufftle = new ArrayList<Integer>();
 		for (int i = 0; i < n; i++)	{
@@ -25,11 +33,9 @@ public class Helper {
 	public static <T> List<T> Shufftle(List<T> list) {
 		int n = list.size();
 
-		// using Knuth Shufftle algorithm
-		Random random;
 		for (int i = 0; i < n; i++) {
-			random = new Random();
-			int k = random.nextInt(i + 1);
+			// random number between i and N-1
+			int k = i + (int) (Math.random() * (n - i));
 
 			// swap k and i
 			T tmp = list.get(i);
@@ -47,5 +53,19 @@ public class Helper {
 			res.add(question);
 		}
 		return res;
+	}
+	
+	public static void SaveCurrentSessionToDatabase() {
+		// create session
+		TestSession session = new TestSession(0, new Date(), CommonDataModel.getInstance().profile.getIdProfile());
+		SesstionTestTable.CreateTestSesstion(session);
+		int sessionId = DBHelper.getLastIndexOfTable(Config.DATABASE_TESTSESSION_TBL);
+		
+		for (int i = 0; i < CommonDataModel.getInstance().questionList.size(); i++) {
+			Question q = CommonDataModel.getInstance().questionList.get(i);
+			SessionQuestion sessionQuestion = new SessionQuestion(0, sessionId, q.getSection(),
+					q.getId(), CommonDataModel.getInstance().questionResult.get(i));
+			SessionQuestionTable.CreateNewSesstionQuestion(sessionQuestion);
+		}
 	}
 }

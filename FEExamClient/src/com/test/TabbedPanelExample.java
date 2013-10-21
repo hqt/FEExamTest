@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 public class TabbedPanelExample extends JFrame {
+	private static final long serialVersionUID = 1L;
+
 	private JTabbedPane tabbedPane;
 
 	private JPanel panel1;

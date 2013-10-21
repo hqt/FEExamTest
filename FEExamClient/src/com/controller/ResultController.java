@@ -1,9 +1,9 @@
 package com.controller;
 
 import java.awt.EventQueue;
-import java.util.ArrayList;
 import java.util.List;
 
+import com.helper.Helper;
 import com.model.CommonDataModel;
 import com.view.ResultView;
 
@@ -38,10 +38,6 @@ public class ResultController {
 		});
 	}
 
-	public static void main(String args[]) {
-
-	}
-
 	public void load() {
 		List<Integer> questionResult = CommonDataModel.getInstance().questionResult;
 
@@ -51,6 +47,9 @@ public class ResultController {
 		}
 		frame.lblYourScore.setText("Your score: " + (total / 100) + "/" + questionResult.size());
 		frame.lblUsername.setText(CommonDataModel.getInstance().profile.getName());
+		
+		// save this session to database
+		Helper.SaveCurrentSessionToDatabase();
 		
 		showView();
 		

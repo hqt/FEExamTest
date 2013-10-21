@@ -1,6 +1,8 @@
 package com.test;
 
 import database.transaction.ProfileTable;
+import database.transaction.SessionQuestionTable;
+import database.transaction.SesstionTestTable;
 
 public class ApplicationTest {
 	
@@ -8,7 +10,10 @@ public class ApplicationTest {
 	
 		
 		//ProfileTable.createProfileTable();
-		ProfileTable.CreateNewProfile("FPT Student");
+		//ProfileTable.CreateNewProfile("FPT Student");
+		
+		SessionQuestionTable.createSesstionQuestionTable();
+		SesstionTestTable.createTestSesstionTable();
 	}
 	
 

@@ -32,17 +32,17 @@ public class CommonDataModel {
 	}
 
 
-	Map<String, List<Integer>> randomQuestions = new HashMap<String, List<Integer>>();
-	Map<String, Integer> pivot = new HashMap<String, Integer>();
-	List<String> sections = SectionTable.selectAllSections();
+	public Map<String, List<Integer>> randomQuestions = new HashMap<String, List<Integer>>();
+	public Map<String, Integer> pivot = new HashMap<String, Integer>();
+	public List<String> sections = SectionTable.selectAllSections();
 	
 	private CommonDataModel() {
 	
 		// building order or random questions
 		// this order will be kept until restart app
 		for (String section : sections) {
-			int rows = CategoryTable.getNumberEntities(section);
-			List<Integer> shufftles = Helper.Shuffle(rows);
+			List<Integer> ids = CategoryTable.getAllCategoryIds(section);
+			List<Integer> shufftles = Helper.Shufftle(ids);
 			randomQuestions.put(section, shufftles);
 			// building pivot to store current location of each type of question
 			pivot.put(section, 0);
@@ -55,13 +55,15 @@ public class CommonDataModel {
 	
 	public List<Integer> getRandomOrder(String tblName, int num) {
 		List<Integer> orders = randomQuestions.get(tblName);
+		if (orders.size() == 0) return new ArrayList<Integer>();
+		
 		int currPivot = pivot.get(tblName);
 
 		List<Integer> res = new ArrayList<Integer>();
 		int n = orders.size();
 		for (int i = 1; i <= num;i++) {
-			int order = (currPivot + i) %  n; 
-			res.add(order);
+			int index = (currPivot + i) %  n; 
+			res.add(orders.get(index));
 		}
 		
 		currPivot = (currPivot + num) % n;
@@ -91,7 +93,7 @@ public class CommonDataModel {
 		int id = sections.size() - 1;
 		num = quantity % sections.size();
 		ids = getRandomOrder(sections.get(id), num);
-		questionList.addAll(Helper.getAllQuestionsByIds(sections.get(sections.size()), ids));
+		questionList.addAll(Helper.getAllQuestionsByIds(sections.get(id), ids));
 
 		questionList = Helper.Shufftle(questionList);
 		return true;
@@ -101,6 +103,8 @@ public class CommonDataModel {
 		num = Math.min(num, CategoryTable.getNumberEntities(sectionName));
 		resetFields(num);
 		List<Integer> ids = getRandomOrder(sectionName, num);
+		
+		
 		questionList = Helper.getAllQuestionsByIds(sectionName, ids);
 	}
 	

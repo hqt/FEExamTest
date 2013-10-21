@@ -67,6 +67,7 @@ public class CategoryTable {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				numOfSelections = 0;
+				int id = rs.getInt(1);
 				String question = rs.getString(2);
 				String ansa = rs.getString(3); if (!ansa.equals("")) numOfSelections++;
 				String ansb = rs.getString(4); if (!ansb.equals("")) numOfSelections++;
@@ -86,6 +87,7 @@ public class CategoryTable {
 				
 				Question q = new Question(question, ansa, ansb, ansc, ansd, anse,
 						img, imga, imgb, imgc, imgd, imge, exp, imgexp, result, tblName, numOfSelections);
+				q.setId(id);
 				
 				// TrungDQ: if there is no options for the question, then the question is absolutely wrong or error.
 				if (numOfSelections > 0) {
@@ -221,8 +223,11 @@ public class CategoryTable {
 		try {
 			Class.forName(Config.SQLITE_JDBC);
 			c = DriverManager.getConnection(Config.CONNECTION_STRING);
-			String sql = "SELECT * FROM " + tblName;
+			String sql = "SELECT * FROM " + tblName
+						+ " WHERE " + "ID=?";
+			
 			stmt = c.prepareStatement(sql);
+			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				numOfSelections = 0;
@@ -243,6 +248,7 @@ public class CategoryTable {
 				byte[] imgexp = rs.getBytes(16);
 				Question q = new Question(question, ansa, ansb, ansc, ansd, anse,
 						img, imga, imgb, imgc, imgd, imge, exp, imgexp, result, tblName, numOfSelections);
+				q.setId(id);
 				return q;
 			}
 			
@@ -262,6 +268,39 @@ public class CategoryTable {
 			}
 		}
 		
+	}
+
+	public static List<Integer> getAllCategoryIds(String tblName) {
+		Connection c = null;
+		PreparedStatement stmt = null;
+		
+		List<Integer> res = new ArrayList<Integer>();
+		
+		try {
+			Class.forName(Config.SQLITE_JDBC);
+			c = DriverManager.getConnection(Config.CONNECTION_STRING);
+			String sql = "SELECT ID FROM " + tblName;
+			stmt = c.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				res.add(id);
+			}
+			return res;
+		}
+		catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			return null;
+		}
+		finally {
+			try {
+				stmt.close();
+				c.close();
+			}
+			catch (SQLException e) {
+				System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			}
+		}
 	}
 
 }

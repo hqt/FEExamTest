@@ -2,7 +2,6 @@ package com.controller;
 
 import java.awt.EventQueue;
 import java.util.List;
-import java.util.Locale.Category;
 
 import com.model.CommonDataModel;
 import com.view.WelcomeView;

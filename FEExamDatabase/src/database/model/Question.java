@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
+	
+	int id;	// this field will be settted in database when retrieve information
+	
 	String question;
 	String ansa, ansb, ansc, ansd, anse;
 	byte[] img;
@@ -54,6 +57,15 @@ public class Question {
 	
 	public List<byte[]> getAllImages() { return imgSelections; }
 	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public byte[] getImga() {
 		return imga;
 	}

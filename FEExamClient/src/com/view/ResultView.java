@@ -77,7 +77,7 @@ public class ResultView extends JFrame {
 		JButton btnReviewYourTest = new JButton("Review your test");
 		btnReviewYourTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ReviewController.getInstance().showView();
+				ReviewController.getInstance().load();
 			}
 		});
 		btnReviewYourTest.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -87,7 +87,7 @@ public class ResultView extends JFrame {
 		JButton btnNewTest = new JButton("Attempt a new test");
 		btnNewTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				WelcomeController.getInstance().showView();
+				WelcomeController.getInstance().load();
 				dispose();
 			}
 		});
@@ -98,7 +98,7 @@ public class ResultView extends JFrame {
 		JButton btnViewStatitics = new JButton("View statitics");
 		btnViewStatitics.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				StatiticsController.getInstance().showView();
+				StatiticsController.getInstance().load();
 			}
 		});
 		btnViewStatitics.setFont(new Font("Tahoma", Font.PLAIN, 17));

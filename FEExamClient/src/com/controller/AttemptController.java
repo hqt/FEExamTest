@@ -8,8 +8,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import com.model.CommonDataModel;
+import com.model.QuestionComponent;
 import com.view.AttemptView;
-import com.view.QuestionComponent;
 
 import database.model.Question;
 
@@ -42,9 +42,6 @@ public class AttemptController {
 				}
 			}
 		});
-	}
-	public static void main(String args[]) {
-		
 	}
 
 	public void load(String sectionName) {
@@ -82,12 +79,13 @@ public class AttemptController {
 		List<Question> questions = CommonDataModel.getInstance().questionList;
 		
 		for (int i = 0; i < questions.size(); i++) {
-			frame.pnlQuestion.add(new QuestionComponent(i, questions.get(i)), "wrap");
+			frame.pnlQuestion.add(new QuestionComponent(i, questions.get(i), true), "wrap");
 		}
 	}
 	
-	public void processUserInput() {
+	public void processUserChoice() {
 		// TODO Auto-generated method stub
+		// Currently. Not support any special action yet
 		
 	}
 }

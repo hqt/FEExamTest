@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -29,9 +28,6 @@ import net.miginfocom.swing.MigLayout;
 import com.controller.AttemptController;
 import com.controller.ResultController;
 import com.controller.WelcomeController;
-import com.model.QuestionList;
-
-import database.model.Question;
 
 public class AttemptView extends JFrame {
 
@@ -146,6 +142,7 @@ public class AttemptView extends JFrame {
 		gbc_comboBox.gridx = 0;
 		gbc_comboBox.gridy = 4;
 		panel.add(cbxPagination, gbc_comboBox);
+	//	cbxPagination.addMouseListener(new MouseListenero)
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(SystemColor.info);
@@ -170,7 +167,7 @@ public class AttemptView extends JFrame {
 		panel.add(btnFinish, gbc_btnFinish);
 		btnFinish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AttemptController.getInstance().processUserInput();
+				AttemptController.getInstance().processUserChoice();
 				ResultController.getInstance().load();
 				dispose();
 			}

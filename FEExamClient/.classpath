@@ -7,5 +7,7 @@
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.7.2-javadoc.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/FEExamDatabase"/>
 	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
+	<classpathentry kind="lib" path="lib/jcommon-1.0.20.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.0.16.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

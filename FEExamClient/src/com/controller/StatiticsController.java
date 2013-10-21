@@ -1,7 +1,11 @@
 package com.controller;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.JPanel;
+
+import com.helper.PieChart3DRotation;
 import com.view.StatiticsView;
 
 public class StatiticsController {
@@ -34,10 +38,24 @@ public class StatiticsController {
 			}
 		});
 	}
+	
 	public static void main(String args[]) {
 	}
 
 	public void load() {
+		// loading code here
+		System.out.println("loading chart");
+		statiticsCategoryPieChart();
 		showView();
+	}
+	
+	public void statiticsCategoryPieChart() {
+		/*List<String> sections = CommonDataModel.getInstance().sections;
+		List<Integer> statitics = new ArrayList<Integer>();
+		for (String section : sections) {
+			
+		}*/
+		JPanel jpanel = PieChart3DRotation.createDemoPanel();
+		frame.layoutDisplayPanel.add(jpanel, BorderLayout.CENTER);
 	}
 }
